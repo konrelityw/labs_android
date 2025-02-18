@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">lab1_android</string>
+    <string name="small_font">Малий (14sp)</string>
+    <string name="medium_font">Середній (18sp)</string>
+    <string name="large_font">Великий (22sp)</string>
+    <string name="input_hint">Введіть текст</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+</resources>
