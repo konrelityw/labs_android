@@ -1,68 +1,29 @@
 package com.example.lab1_android
 
-
 import android.os.Bundle
-import android.util.TypedValue
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
+import com.example.lab1_android.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var inputText: EditText
-    private lateinit var outputText: TextView
-    private lateinit var fontSizeGroup: RadioGroup
-    private lateinit var okButton: Button
-    private lateinit var cancelButton: Button
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        inputText = findViewById(R.id.inputText)
-        outputText = findViewById(R.id.outputText)
-        fontSizeGroup = findViewById(R.id.fontSizeGroup)
-        okButton = findViewById(R.id.okButton)
-        cancelButton = findViewById(R.id.cancelButton)
-
-        if (fontSizeGroup.checkedRadioButtonId == -1) {
-            fontSizeGroup.check(R.id.smallFont)
-        }
-
-        okButton.setOnClickListener {
-            if (inputText.text.toString().isEmpty()) {
-                showAlert("Помилка", "Будь ласка, введіть текст")
-                return@setOnClickListener
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.fragment_container, InputFragment())
             }
-
-            val fontSize = when (fontSizeGroup.checkedRadioButtonId) {
-                R.id.smallFont -> 14f
-                R.id.mediumFont -> 18f
-                R.id.largeFont -> 22f
-                else -> 14f
-            }
-
-            outputText.text = inputText.text.toString()
-            outputText.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
-        }
-
-        cancelButton.setOnClickListener {
-            inputText.setText("")
-            outputText.text = ""
         }
     }
 
-
-
-    private fun showAlert(title: String, message: String) {
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
+    fun showResultFragment(text: String, fontSize: Float) {
+        supportFragmentManager.commit {
+            replace(R.id.fragment_container, ResultFragment.newInstance(text, fontSize))
+            addToBackStack(null)
+        }
     }
 }
