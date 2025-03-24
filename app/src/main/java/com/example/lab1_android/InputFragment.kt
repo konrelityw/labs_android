@@ -11,6 +11,7 @@ import com.example.lab1_android.databinding.FragmentInputBinding
 class InputFragment : Fragment() {
     private var _binding: FragmentInputBinding? = null
     private val binding get() = _binding!!
+    private lateinit var fileHelper: FileHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,6 +19,7 @@ class InputFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentInputBinding.inflate(inflater, container, false)
+        fileHelper = FileHelper(requireContext())
         return binding.root
     }
 
@@ -41,7 +43,20 @@ class InputFragment : Fragment() {
                 else -> 14f
             }
 
+            val entry = TextEntry(inputText, fontSize)
+            val isSaved = fileHelper.saveTextEntry(entry)
+
+            if (isSaved) {
+                Toast.makeText(requireContext(), "Текст успішно збережено", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Помилка при збереженні тексту", Toast.LENGTH_SHORT).show()
+            }
+
             (requireActivity() as MainActivity).showResultFragment(inputText, fontSize)
+        }
+
+        binding.openButton.setOnClickListener {
+            (requireActivity() as MainActivity).openStoredDataActivity()
         }
     }
 

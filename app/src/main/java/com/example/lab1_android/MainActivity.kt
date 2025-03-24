@@ -1,5 +1,6 @@
 package com.example.lab1_android
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -25,5 +26,10 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragment_container, ResultFragment.newInstance(text, fontSize))
             addToBackStack(null)
         }
+    }
+
+    fun openStoredDataActivity() {
+        val intent = Intent(this, StoredDataActivity::class.java)
+        startActivity(intent)
     }
 }
