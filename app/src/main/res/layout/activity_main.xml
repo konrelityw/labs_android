@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.example.lab1_android.MainActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Аудіо" />
+
+        <RadioButton
+            android:id="@+id/radioVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Відео" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSelectFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Вибрати файл" />
+
+    <Button
+        android:id="@+id/btnPlayLocal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Відтворити локальний файл" />
+
+    <EditText
+        android:id="@+id/urlInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="Введіть URL"
+        android:inputType="textUri" />
+
+    <Button
+        android:id="@+id/btnLoadFromUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Завантажити з URL" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1">
+
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/audioOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnPlayPause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Відтворити" />
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Зупинити" />
+    </LinearLayout>
+</LinearLayout>
